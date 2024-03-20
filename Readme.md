@@ -30,6 +30,13 @@ internal class BetterStartupHook
 }
 ```
 
+#### Easy packaging of necessary assemblies
+To simplify the packaging / management & configuration of necessary startup hook assemblies and dependencies, *BetterStartupHook* is provided as a nuget package.
+
+[![NuGet](http://img.shields.io/nuget/v/BetterStartupHook.svg)](https://www.nuget.org/packages/BetterStartupHook/)
+
+Simply add the nuget package to your Better-Startup-Hook project, so you have all necessary assemblies in a single place - your projects output folder.   
+
 ### How-To create/use a BetterStartupHook 
 #### 1. Implement your hook by creating a .Net class library project e.g. 
 

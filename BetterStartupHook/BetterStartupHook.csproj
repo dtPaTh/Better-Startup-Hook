@@ -9,7 +9,7 @@
 	  <Description>Better-Startup-Hook allows to create startup hooks that automatically resolves additional dependencies.</Description>
 	  <PackageProjectUrl>https://github.com/dtPaTh/Better-Startup-Hook</PackageProjectUrl>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <PackageReadmeFile>Readme.md</PackageReadmeFile>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
 	  <PackageReleaseNotes>First release</PackageReleaseNotes>
   </PropertyGroup>
 
