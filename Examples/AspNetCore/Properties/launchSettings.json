@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:54507",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5189",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_STARTUP_HOOKS": "$(MSBuildProjectDirectory)\\..\\..\\BetterStartupHook\\bin\\Debug\\net8.0\\BetterStartupHook.dll",
+        "BETTER_STARTUP_HOOKS": "$(MSBuildProjectDirectory)\\..\\EnableOpenTelemetryTracing\\bin\\Debug\\net8.0\\EnableOpenTelemetryTracing.dll"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
