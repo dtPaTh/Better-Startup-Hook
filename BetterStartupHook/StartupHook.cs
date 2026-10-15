@@ -63,33 +63,40 @@ internal class StartupHook
 
     public static void TryExecuteStartupHooks()
     {
-        var startupAssemblies = Environment.GetEnvironmentVariable(StartupHooks, EnvironmentVariableTarget.Process);
-        if (!String.IsNullOrEmpty(startupAssemblies))
+        try
         {
-            foreach (var startupAssembly in startupAssemblies.Split(';', StringSplitOptions.RemoveEmptyEntries))
+            var startupAssemblies = Environment.GetEnvironmentVariable(StartupHooks, EnvironmentVariableTarget.Process);
+            if (!String.IsNullOrEmpty(startupAssemblies))
             {
-                var loadContext = new SharedAssemblyLoadContext(startupAssembly);
-                var assembly = loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(startupAssembly)));
-
-                if (assembly == null)
-                    Console.WriteLine("[BetterStartupHooks] Couldn't load " + startupAssembly);
-                else
+                foreach (var startupAssembly in startupAssemblies.Split(';', StringSplitOptions.RemoveEmptyEntries))
                 {
-                    try
+                    var loadContext = new SharedAssemblyLoadContext(startupAssembly);
+                    var assembly = loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(startupAssembly)));
+
+                    if (assembly == null)
+                        Console.WriteLine("[BetterStartupHooks] Couldn't load " + startupAssembly);
+                    else
                     {
-                        ExecuteStartupHook(assembly);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("[BetterStartupHooks] Error in startuphook " + startupAssembly + ":  " + ex.ToString());
+                        try
+                        {
+                            ExecuteStartupHook(assembly);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("[BetterStartupHooks] Error in startuphook " + startupAssembly + ":  " + ex.ToString());
+                        }
                     }
                 }
             }
+        }catch(Exception ex)
+        {
+            Console.Write("[BetterStartupHook] Failed: "+ ex.ToString());
         }
     }
 
     public static void Initialize()
     {
+        Console.WriteLine("[BetterStartupHook] Initializing");
         TryExecuteStartupHooks();
     }
 }
