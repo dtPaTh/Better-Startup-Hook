@@ -62,7 +62,7 @@ Add ```CopyLocalLockFileAssemblies``` as shown in the following
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    ...
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
@@ -94,37 +94,17 @@ Linux:
 In the [/Examples](/Examples/) folder you find a standard Asp.Net Core example application created from Visual Studio templates. 
 Additionally there is the EnableOpenTelemetryTracing project, which implements a BetterStartupHook and configures OpenTelemetry tracing exporting it's telemetry to the console. 
 
-The Asp.Net Core Application launchSettings is pre-configured to load the hooks. 
+The Asp.Net Core Application launchSettings is pre-configured to load the hooks by setting the following additional environment variables: 
 ```
 {
-  "$schema": "http://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:54507",
-      "sslPort": 0
-    }
-  },
-  "profiles": {
-    "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "http://localhost:5189",
+ ...
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DOTNET_STARTUP_HOOKS": "$(MSBuildProjectDirectory)\\..\\..\\BetterStartupHook\\bin\\Debug\\net8.0\\BetterStartupHook.dll",
-        "BETTER_STARTUP_HOOKS": "$(MSBuildProjectDirectory)\\..\\EnableOpenTelemetryTracing\\bin\\Debug\\net8.0\\EnableOpenTelemetryTracing.dll"
+        ..
+        "DOTNET_STARTUP_HOOKS": "$(MSBuildProjectDirectory)\\..\\EnableOpenTelemetryTracing\\bin\\$(Configuration)\\$(TargetFramework)\\BetterStartupHook.dll",
+        "BETTER_STARTUP_HOOKS": "$(MSBuildProjectDirectory)\\..\\EnableOpenTelemetryTracing\\bin\\$(Configuration)\\$(TargetFramework)\\EnableOpenTelemetryTracing.dll"0\\EnableOpenTelemetryTracing.dll"
       }
     },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    }
+    ...
   }
 }
 ```
